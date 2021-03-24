@@ -123,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
       workoutData.duration = Number(resistanceDurationInput.value.trim());
     }
     // Call the function to add the API, clear inputs and advise the user that the exercise was added
-    console.log(workoutData);
     await API.addExercise(workoutData);
     clearInputs();
     toast.classList.add("success");
@@ -161,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       handleFormSubmit(event);
     });
   }
+
   if (addButton) {
     addButton.addEventListener("click", handleFormSubmit);
   }

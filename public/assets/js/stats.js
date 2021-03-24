@@ -21,12 +21,16 @@ function generatePalette() {
   return arr;
 }
 
+// Function to add data to the charts and select where to display them
 function populateChart(data) {
-  let durations = data.map(({ totalDuration }) => totalDuration);
+
+  let durations = calculateTotalDuration(data);
+  // let durations = data.map(({ totalDuration }) => totalDuration);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
   const colors = generatePalette();
 
+// Define the html elemets where each chart is going to be displayed
   let line = document.querySelector('#canvas').getContext('2d');
   let bar = document.querySelector('#canvas2').getContext('2d');
   let pie = document.querySelector('#canvas3').getContext('2d');
@@ -186,6 +190,24 @@ function calculateTotalWeight(data) {
     }, 0);
 
     totals.push(workoutTotal);
+  });
+
+  return totals;
+}
+
+function calculateTotalDuration(data) {
+  let totals = [];
+
+  data.forEach((workout) => {
+    const workoutTotalDuration = workout.exercises.reduce((total, { type, duration }) => {
+      if (type === 'resistance') {
+        return total + duration;
+      } else {
+        return total;
+      }
+    }, 0);
+console.log(workoutTotalDuration);
+    totals.push(workoutTotalDuration);
   });
 
   return totals;

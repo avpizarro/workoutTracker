@@ -5,7 +5,6 @@ router.get("/api/workouts", (req, res) => {
   Workout.find({})
     .sort({ date: "asc" })
     .then((dbWorkout) => {
-      console.log("Added workouts" + dbWorkout);
       res.json(dbWorkout);
     })
     .catch((err) => {
@@ -19,7 +18,6 @@ router.put("/api/workouts/:id", (req, res) => {
     { $push: { exercises: req.body } }
   )
     .then((dbWorkout) => {
-      console.log(dbWorkout);
       res.json(dbWorkout);
     })
     .catch((err) => {
