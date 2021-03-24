@@ -1,10 +1,13 @@
 const router = require("express").Router();
+const { request } = require("express");
+const mongoose = require("mongoose");
 const Workout = require("../models/workout.js");
 
 router.get("/api/workouts", (req, res) => {
   Workout.find({})
-    .sort({ date: -1 })
+    .sort({ date: "asc" })
     .then((dbWorkout) => {
+      console.log("Added workouts" + dbWorkout);
       res.json(dbWorkout);
     })
     .catch((err) => {
@@ -12,10 +15,13 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
-router.put("/api/workouts/:id", ({ body }, res) => {
-  Workout.update(body)
+router.put("/api/workouts/:id", (req, res) => {
+  Workout.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: { exercises: req.body } }
+  )
     .then((dbWorkout) => {
-      res.json(dbWorkout);
+      console.log(dbWorkout);
     })
     .catch((err) => {
       res.status(400).json(err);
