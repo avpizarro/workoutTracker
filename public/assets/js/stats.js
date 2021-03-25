@@ -26,7 +26,7 @@ function populateChart(data) {
   // let durations = data.duration;
   // let pounds = data.weight;
 
-  let durations = data.map(({ totalDuration }) => totalDuration);
+  let durations = data.map(({ totalDuration }) => totalDuration).reverse();
   // let durations = calculateTotalDuration(data);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
@@ -191,7 +191,7 @@ function calculateTotalWeight(data) {
       }
     }, 0);
     console.log(workoutTotal);
-    totals.push(workoutTotal);
+    totals.unshift(workoutTotal);
   });
 
   return totals;
@@ -202,7 +202,7 @@ function workoutNames(data) {
 
   data.forEach((workout) => {
     workout.exercises.forEach((exercise) => {
-      workouts.push(exercise.name);
+      workouts.unshift(exercise.name);
     });
   });
 
