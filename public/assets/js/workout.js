@@ -29,6 +29,7 @@ function tallyExercises(exercises) {
       acc.totalSets = (acc.totalSets || 0) + curr.sets;
       acc.totalReps = (acc.totalReps || 0) + curr.reps;
     } else if (curr.type === "cardio") {
+      acc.totalDuration = (acc.totalDuration || 0) + curr.duration;
       acc.totalDistance = (acc.totalDistance || 0) + curr.distance;
     }
     return acc;
@@ -50,7 +51,6 @@ function formatDate(date) {
 
 // Funtion to render the workout summary
 function renderWorkoutSummary(summary) {
-
   // Select the html element that will contain the info
   const container = document.querySelector(".workout-stats");
 
