@@ -5,7 +5,7 @@
 
   Add exercises and keep track of your workouts to improve your performance. 
 
-Deployed app :link: 
+Deployed app :link: https://evening-journey-59079.herokuapp.com/
 
 Github repository :link: https://github.com/avpizarro/workoutTracker.git
   
@@ -21,7 +21,7 @@ Github repository :link: https://github.com/avpizarro/workoutTracker.git
   * [Questions](#questions)
 
   ## Installation
-  Visit this link to start ussing the app :link:
+  Visit this link to start ussing the app :link: https://evening-journey-59079.herokuapp.com/
 
   ## Usage
 
