@@ -23,14 +23,14 @@ function generatePalette() {
 
 // Function to add data to the charts and select where to display them
 function populateChart(data) {
-  // let durations = data.duration;
-  // let pounds = data.weight;
 
   let durations = data.map(({ totalDuration }) => totalDuration).reverse();
   // let durations = calculateTotalDuration(data);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
   const colors = generatePalette();
+  let exercisePounds = getExerciseWeight(data);
+  let exerciseDurations = getExerciseDuration(data);
 
   // Define the html elemets where each chart is going to be displayed
   let line = document.querySelector("#canvas").getContext("2d");
@@ -146,7 +146,7 @@ function populateChart(data) {
         {
           label: "Exercises Performed",
           backgroundColor: colors,
-          data: durations,
+          data: exerciseDurations,
         },
       ],
     },
@@ -166,7 +166,7 @@ function populateChart(data) {
         {
           label: "Exercises Performed",
           backgroundColor: colors,
-          data: pounds,
+          data: exercisePounds,
         },
       ],
     },
@@ -190,12 +190,32 @@ function calculateTotalWeight(data) {
         return total;
       }
     }, 0);
-    console.log(workoutTotal);
     totals.unshift(workoutTotal);
   });
-
-  return totals;
+    return totals;
 }
+
+function getExerciseDuration(data)  {
+  let durations = [];
+
+  data.forEach((workout) => {
+  workout.exercises.forEach((exercise)=> {
+    durations.unshift(exercise.duration);
+  });
+});
+return durations;
+};
+
+function getExerciseWeight(data)  {
+  let weights = [];
+
+  data.forEach((workout) => {
+  workout.exercises.forEach((exercise) => {
+  weights.unshift(exercise.weight);
+  });
+});
+return weights;
+};
 
 function workoutNames(data) {
   let workouts = [];
@@ -205,7 +225,8 @@ function workoutNames(data) {
       workouts.unshift(exercise.name);
     });
   });
-
+  
+  console.log(workouts);
   // return de-duplicated array with JavaScript `Set` object
   return [...new Set(workouts)];
 }
