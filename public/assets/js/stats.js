@@ -24,8 +24,11 @@ function generatePalette() {
 // Function to add data to the charts and select where to display them
 function populateChart(data) {
 
-  let durations = calculateTotalDuration(data);
-  // let durations = data.map(({ totalDuration }) => totalDuration);
+  // let durations = data.duration;
+  // let pounds = data.weight;
+  
+  let durations = data.map(({ totalDuration }) => totalDuration);
+  // let durations = calculateTotalDuration(data);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
   const colors = generatePalette();
